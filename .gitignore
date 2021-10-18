@@ -1,0 +1,8 @@
+HELP.md
+target/
+.mvn/
+.idea/
+mvnw
+mvnw.cmd
+analyst.iml
+src/test/
