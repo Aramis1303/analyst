@@ -1,9 +1,12 @@
 package ru.evaproj.analyst.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.evaproj.analyst.dto.UserDTO;
 import ru.evaproj.analyst.entities.UserEntity;
+import ru.evaproj.analyst.repos.RoleRepo;
 import ru.evaproj.analyst.repos.UserRepo;
 import ru.evaproj.analyst.utils.Transformator;
 
@@ -13,32 +16,40 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
-    public UserDTO checkUser(String login, String password) {
+    @Autowired
+    RoleRepo roleRepo;
 
-        UserEntity entity = userRepo.findByLoginAndPassword(login, encodePassword(password));
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserDTO checkUser(UserDTO user) {
+
+        UserEntity entity = userRepo.findByLoginAndPassword(user.getLogin(), encodePassword(user.getPassword()));
         if (entity != null) {
             return Transformator.userEntityToDto(entity);
         }
         else throw new RuntimeException("User not found");
     }
 
-    public void registrationUser (String name, String login, String password, String email) {
+    public void registrationUser (UserDTO user) {
 
-        if(userRepo.existsByLogin(login)) throw new RuntimeException("User with login: " + login + " already is exist");
-        if(userRepo.existsByEmail(email)) throw new RuntimeException("User with email: " + email + " already is exist");
+        if(!user.getPassword().equals(user.getPasswordConfim())) throw new RuntimeException("Password and confirm aren't equals");
+        if(userRepo.existsByLogin(user.getLogin())) throw new RuntimeException("User with login: " + user.getLogin() + " already is exist");
+        if(userRepo.existsByEmail(user.getEmail())) throw new RuntimeException("User with email: " + user.getEmail() + " already is exist");
 
-        UserEntity entity = new UserEntity();
-        entity.setName(name);
-        entity.setLogin(login);
-        entity.setPassword(encodePassword(password));
-        entity.setEmail(email);
+        UserEntity entry = Transformator.userDtoToEntity(user);
 
-        Transformator.userEntityToDto(userRepo.save(entity));
+        entry.setPassword(
+                encodePassword(
+                        entry.getPassword()
+                )
+        );
+
+        userRepo.save(entry);
     }
 
-    // TODO: Написать энкодер через Spring Secure
-    private String encodePassword(String str) {
-        return null;
+    private String encodePassword(String password) {
+        return bCryptPasswordEncoder.encode(password);
     }
 
 

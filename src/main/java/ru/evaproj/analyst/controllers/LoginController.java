@@ -3,13 +3,12 @@ package ru.evaproj.analyst.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import ru.evaproj.analyst.dto.UserDTO;
 import ru.evaproj.analyst.services.UserService;
 
-
+@Controller
 @RequestMapping("/rest")
 public class LoginController {
 
@@ -18,14 +17,18 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value = "/login")
-    public String helloWorldController(
-            @RequestParam String login,
-            @RequestParam String password
-        ) {
-        logger.info("Try to login: " + login + ", " + password);
+    @GetMapping(value = "/login")
+    public String getLoginPage() {
+        return "login";
+    }
 
-        UserDTO userDto = userService.checkUser(login, password);
+    @PostMapping(value = "/login")
+    public String postLoginData(
+            @RequestParam UserDTO user
+            ) {
+        logger.info("Try to login: " + user.getLogin() + ", " + user.getPassword());
+
+        UserDTO userDto = userService.checkUser(user);
 
         return "login";
     }
