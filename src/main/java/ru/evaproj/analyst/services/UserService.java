@@ -6,6 +6,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.evaproj.analyst.dto.UserDTO;
 import ru.evaproj.analyst.entities.UserEntity;
+import ru.evaproj.analyst.exceptions.EmaiAlreadyExistException;
+import ru.evaproj.analyst.exceptions.UserAlreadyExistException;
 import ru.evaproj.analyst.repos.RoleRepo;
 import ru.evaproj.analyst.repos.UserRepo;
 import ru.evaproj.analyst.utils.Transformator;
@@ -34,8 +36,8 @@ public class UserService {
     public void registrationUser (UserDTO user) {
 
         if(!user.getPassword().equals(user.getPasswordConfim())) throw new RuntimeException("Password and confirm aren't equals");
-        if(userRepo.existsByLogin(user.getLogin())) throw new RuntimeException("User with login: " + user.getLogin() + " already is exist");
-        if(userRepo.existsByEmail(user.getEmail())) throw new RuntimeException("User with email: " + user.getEmail() + " already is exist");
+        if(userRepo.existsByLogin(user.getLogin())) throw new UserAlreadyExistException("User with login: " + user.getLogin() + " already is exist");
+        if(userRepo.existsByEmail(user.getEmail())) throw new EmaiAlreadyExistException("User with email: " + user.getEmail() + " already is exist");
 
         UserEntity entry = Transformator.userDtoToEntity(user);
 
