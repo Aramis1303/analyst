@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Main page</title>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p>Enter by  <a href="/rest/login">login</a></p>
-<p>or  <a href="/rest/registration">registration</a></p>
+    <div>
+        <div th:insert="~{fragments/top_fragment :: corner}" />
+        <div th:insert="~{fragments/top_fragment :: logo}" />
+        <div th:insert="~{fragments/top_fragment :: sign}" />
+    </div>
+
+    <div>
+        <div th:insert="~{fragments/left_fragment :: menu}"></div>
+        <div th:insert="~{fragments/workspase_fragment :: panel}"></div>
+        <div th:insert="~{fragments/right_fragment :: data}"></div>
+    </div>
+
+    <div class="button" th:insert="~{fragments/bottom_fragment :: bottom}"></div>
+
 </body>
 </html>

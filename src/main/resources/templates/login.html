@@ -5,6 +5,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Hello, ' + ${name} + '!'" />
+<div>
+    <div th:insert="~{fragments/top_fragment :: corner}" />
+    <div th:insert="~{fragments/top_fragment :: logo}" />
+    <div th:insert="~{fragments/top_fragment :: sign}" />
+</div>
+
+<div>
+    <form action="/login" th:object="${user}" method="POST" enctype="utf8">
+        <div>
+            <label>Login: </label>
+            <input type="text" th:field="*{login}"/>
+        </div>
+        <div>
+            <label>Password: </label>
+            <input type="password" th:field="*{password}"/>
+        </div>
+        <button type="submit">enter</button>
+    </form>
+</div>
+
+<div class="button" th:insert="~{fragments/bottom_fragment :: bottom}"></div>
+
 </body>
 </html>
