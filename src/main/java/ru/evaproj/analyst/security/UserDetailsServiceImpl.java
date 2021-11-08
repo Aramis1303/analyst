@@ -1,7 +1,12 @@
 package ru.evaproj.analyst.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.evaproj.analyst.dto.UserDTO;
@@ -12,8 +17,9 @@ import ru.evaproj.analyst.repos.RoleRepo;
 import ru.evaproj.analyst.repos.UserRepo;
 import ru.evaproj.analyst.utils.Transformator;
 
+@Slf4j
 @Service
-public class UserService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserRepo userRepo;
@@ -24,14 +30,15 @@ public class UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserDTO checkUser(UserDTO user) {
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        UserEntity entity = userRepo
+                                .findByLogin(login)
+                                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + login));
 
-        UserEntity entity = userRepo.findByLoginAndPassword(user.getLogin(), encodePassword(user.getPassword()));
-        if (entity != null) {
-            return Transformator.userEntityToDto(entity);
-        }
-        else throw new RuntimeException("User not found");
+        return UserDetailsImpl.build(entity);
     }
+
 
     public void registrationUser (UserDTO user) {
 
@@ -46,13 +53,18 @@ public class UserService {
                         entry.getPassword()
                 )
         );
-
+        log.info("Saving new user: " + entry);
         userRepo.save(entry);
     }
 
     private String encodePassword(String password) {
+
         return bCryptPasswordEncoder.encode(password);
     }
 
+    private boolean checkPassword(String raw, String ecoded) {
+
+        return bCryptPasswordEncoder.matches(raw, ecoded);
+    }
 
 }
