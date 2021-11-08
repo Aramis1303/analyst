@@ -1,37 +1,24 @@
 package ru.evaproj.analyst.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import ru.evaproj.analyst.dto.UserDTO;
-import ru.evaproj.analyst.services.UserService;
 
+import javax.servlet.http.HttpSession;
+
+
+@Slf4j
 @Controller
-@RequestMapping("/rest")
 public class LoginController {
-
-    Logger logger = LoggerFactory.getLogger(LoginController.class);
-
-    @Autowired
-    UserService userService;
 
     @GetMapping(value = "/login")
     public String getLoginPage(Model model) {
         model.addAttribute("user", new UserDTO());
-        return "login";
-    }
-
-    @PostMapping(value = "/login")
-    public String postLoginData(
-            @RequestParam UserDTO user
-            ) {
-        logger.info("Try to login: " + user.getLogin() + ", " + user.getPassword());
-
-        UserDTO userDto = userService.checkUser(user);
-
+        log.info("GET /login");
         return "login";
     }
 

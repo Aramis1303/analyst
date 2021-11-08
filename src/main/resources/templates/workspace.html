@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
+<div>
+    <div th:insert="~{fragments/top_fragment :: corner}" />
+    <div th:insert="~{fragments/top_fragment :: logo}" />
+    <div th:insert="~{fragments/top_fragment :: sign}" />
+</div>
 
+<div>
+    <h1>Hello <span th:text="${user}" /></h1>
+    <div th:insert="~{fragments/workspace_fragment :: panel}" />
+</div>
+
+<div class="button" th:insert="~{fragments/bottom_fragment :: bottom}"></div>
 </body>
 </html>

@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Oops, something went wrong</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-$END$
+<div>
+    <div th:insert="~{fragments/top_fragment :: corner}" />
+    <div th:insert="~{fragments/top_fragment :: logo}" />
+    <div th:insert="~{fragments/top_fragment :: sign}" />
+</div>
+
+<div>
+    <h3>Oops, something went wrong:</h3>
+    <div>[[${message}]]</div>
+</div>
+
+<div class="button" th:insert="~{fragments/bottom_fragment :: bottom}"></div>
+
 </body>
 </html>

@@ -1,8 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <div>
@@ -12,16 +10,17 @@
 </div>
 
 <div>
-    <form action="/login" th:object="${user}" method="POST" enctype="utf8">
+    <form th:action="@{/login}" method="POST" enctype="utf8">
         <div>
             <label>Login: </label>
-            <input type="text" th:field="*{login}"/>
+            <input type="text" id="username" name="username"/>
         </div>
         <div>
             <label>Password: </label>
-            <input type="password" th:field="*{password}"/>
+            <input type="password" id="password" name="password"/>
         </div>
-        <button type="submit">enter</button>
+        <input type="submit" />
+
     </form>
 </div>
 

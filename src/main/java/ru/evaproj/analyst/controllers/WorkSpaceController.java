@@ -1,18 +1,29 @@
 package ru.evaproj.analyst.controllers;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping
+import java.security.Principal;
+
+
+@Slf4j
+@Controller
 public class WorkSpaceController {
 
     @GetMapping("/workspace")
-    public String getWorkSpace() {
+    public String getWorkSpace(Model model, Principal principal) {
+        log.info("GET /workspace");
+
+        model.addAttribute("user", principal.getName());
         return "workspace";
     }
 
     @GetMapping("/analysis/anomaly")
     public String getAnomaly() {
+        log.info("principal: " + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "analysis_anomaly";
     }
 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
 <body>
-<h1> Регистрация </h1>
-
 <div>
     <div th:insert="~{fragments/top_fragment :: corner}" />
     <div th:insert="~{fragments/top_fragment :: logo}" />
@@ -10,7 +10,10 @@
 </div>
 
 <div>
-    <form action="/" th:object="${user}" method="POST" enctype="utf8">
+    <form th:action="@{/registration}" th:object="${user}" method="POST" enctype="utf8">
+        <div>
+            <h1> Регистрация </h1>
+        </div>
         <div>
             <label>Name</label>
             <input type="text" th:field="*{name}"/>
@@ -39,7 +42,7 @@
             <label>confirm</label>
             <input type="password" th:field="*{passwordConfim}"/>
         </div>
-        <button>send</button>
+        <input type="submit" />
     </form>
 </div>
 
