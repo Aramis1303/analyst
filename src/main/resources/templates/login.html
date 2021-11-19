@@ -1,30 +1,52 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
+    <title>EVA Project: Login page</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/ready.css}" rel="stylesheet" />
+    <link th:href="@{/css/demo.css}" rel="stylesheet" />
+
+    <script th:src="@{/js/core/jquery.3.2.1.min.js}"></script>
+    <script th:src="@{/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
+    <script th:src="@{/js/core/popper.min.js}"></script>
+    <script th:src="@{/js/core/bootstrap.min.js}"></script>
+    <script th:src="@{/js/plugin/chartist/chartist.min.js}"></script>
+    <script th:src="@{/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js}"></script>
+    <script th:src="@{/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+    <script th:src="@{/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js}"></script>
+    <script th:src="@{/js/plugin/jquery-mapael/jquery.mapael.min.js}"></script>
+    <script th:src="@{/js/plugin/jquery-mapael/maps/world_countries.min.js}"></script>
+    <script th:src="@{/js/plugin/chart-circle/circles.min.js}"></script>
+    <script th:src="@{/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+    <script th:src="@{/js/ready.min.js}"></script>
+    <script th:src="@{/js/demo.js}"></script>
 </head>
 <body>
-<div>
-    <div th:insert="~{fragments/top_fragment :: corner}" />
-    <div th:insert="~{fragments/top_fragment :: logo}" />
-    <div th:insert="~{fragments/top_fragment :: sign}" />
-</div>
+    <div>
+        <div th:insert="~{fragments/top_fragment :: corner}" />
+        <div th:insert="~{fragments/top_fragment :: logo}" />
+        <div th:insert="~{fragments/top_fragment :: sign}" />
+    </div>
 
-<div>
-    <form th:action="@{/login}" method="POST" enctype="utf8">
-        <div>
-            <label>Login: </label>
-            <input type="text" id="username" name="username"/>
-        </div>
-        <div>
-            <label>Password: </label>
-            <input type="password" id="password" name="password"/>
-        </div>
-        <input type="submit" />
+    <div>
+        <form th:action="@{/login}" method="POST" enctype="utf8">
+            <div>
+                <label>Login: </label>
+                <input type="text" id="username" name="username"/>
+            </div>
+            <div>
+                <label>Password: </label>
+                <input type="password" id="password" name="password"/>
+            </div>
+            <input type="submit" class="btn btn-primary btn-full text-left mt-3 mb-3" />
+        </form>
+    </div>
 
-    </form>
-</div>
-
-<div class="button" th:insert="~{fragments/bottom_fragment :: bottom}"></div>
-
+    <div class="button" th:insert="~{fragments/bottom_fragment :: bottom}"></div>
 </body>
 </html>
