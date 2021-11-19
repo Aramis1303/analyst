@@ -8,6 +8,8 @@ import java.util.*;
 @Slf4j
 public class SyntaxAnalyst {
 
+    private final List <String> suffixList = Arrays.asList(new String[]{"ая", "яя", "ое", "ее", "ие", "ые", "ого", "его", "ому", "ему", "ом", "ем", "их", "ых", "ими", "ыми", "им", "ым", "ую", "юю", "ой", "ей", "ый", "ий"});
+    private final String simbolsRegex = "[#@$%;,:^*?!№]";
 
     /*  Функция принимает список объектов и наименование строкового поля для
         дальнейшего синтаксического анализа.
@@ -27,15 +29,17 @@ public class SyntaxAnalyst {
                 stream().
                 forEach((obj) -> {
                     try {
-                        Arrays.asList(((String)field.get(obj)).split(" "))
+                        Arrays.asList(((String)field.get(obj)).replaceAll(simbolsRegex, " ").split(" "))
                                 .stream()
                                 .forEach(s -> {
-                                    if (links.containsKey(s)) {
-                                        links.get(s).add(obj);
-                                    }
-                                    else {
-                                        links.put(s, new HashSet<>());
-                                        links.get(s).add(obj);
+                                    if (!(s.equals(" ") || s.equals("") || s == null)) {
+                                        if (links.containsKey(s.toLowerCase())) {
+                                            links.get(s.toLowerCase()).add(obj);
+                                        }
+                                        else {
+                                            links.put(s.toLowerCase(), new HashSet<>());
+                                            links.get(s.toLowerCase()).add(obj);
+                                        }
                                     }
                                 });
                     } catch (IllegalArgumentException | IllegalAccessException ex) {
@@ -45,4 +49,20 @@ public class SyntaxAnalyst {
 
         return links;
     }
+
+    /*  Функция проверяет слово на наличие окончания и убирает его в случае
+        нахождения.
+        Функция возвращает слово без окончания.
+    */
+    private String checkSuffixEnd (String str) {
+        for (String suffix: suffixList) {
+            if (str.endsWith(suffix)) {
+                return str.substring(0, str.lastIndexOf(suffix));
+            }
+        }
+
+        return str;
+    }
+
+
 }
