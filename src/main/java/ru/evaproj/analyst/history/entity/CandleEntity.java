@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "marketName", "timeframe", "timestamp" } )
+        @UniqueConstraint(columnNames = { "market_name_id", "timeframe", "timestamp" } )
 })
 public class CandleEntity {
 

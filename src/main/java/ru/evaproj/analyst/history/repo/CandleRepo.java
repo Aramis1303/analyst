@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface CandleRepo extends JpaRepository<CandleEntity, Long> {
 
-    List<CandleEntity> findAllByMarketNameAndTimeframe();
+    List<CandleEntity> findAllByMarketNameAndTimeframe(@Param("marketName")String marketName, @Param("timeframe")Timeframe timeframe);
 
-    @Query(nativeQuery = true, value = "select ce from CandleEntity ce where ce.marketName =: marketName and ce.timeframe = :timeframe ORDER BY ce.timestamp DESC LIMIT :quantity")
-    List<CandleEntity> findLastFewByMarketNameAndTimeframe(@Param("quantity") Long quantity, @Param("marketName") String marketName, @Param("timeframe") Timeframe timeframe);
+    @Query(nativeQuery = true, value = "select ce from CandleEntity ce where ce.marketName = ?2 and ce.timeframe = ?3 ORDER BY ce.timestamp DESC LIMIT ?1")
+    List<CandleEntity> findLastFewByMarketNameAndTimeframe(Long quantity, String marketName, Timeframe timeframe);
 
 
 }
