@@ -1,4 +1,4 @@
-package ru.evaproj.analyst.calc;
+package ru.evaproj.analyst.calculations;
 
 import lombok.extern.slf4j.Slf4j;
 

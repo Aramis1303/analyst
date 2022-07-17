@@ -1,23 +1,17 @@
 package ru.evaproj.analyst.configs;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.evaproj.analyst.security.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -35,7 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/workspace").hasAnyRole("USER", "CUSTOMER", "ADMIN")
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/swagger-ui").permitAll()
+                .antMatchers("/swagger").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
@@ -52,12 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maxSessionsPreventsLogin(false);
     }
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder());
-    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
