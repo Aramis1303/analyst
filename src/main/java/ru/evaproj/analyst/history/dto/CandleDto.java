@@ -8,10 +8,11 @@ public class CandleDto {
 
     private Long timestamp;
 
-    private Long open;
-    private Long close;
-    private Long high;
-    private Long low;
+    private Double open;
+    private Double close;
+    private Double high;
+    private Double low;
+
     private Long volume;
 
 }

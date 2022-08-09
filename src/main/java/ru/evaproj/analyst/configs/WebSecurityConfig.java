@@ -4,7 +4,6 @@ package ru.evaproj.analyst.configs;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,9 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/analysis/**").hasAnyRole("CUSTOMER", "ADMIN")
-                .antMatchers("/workspace").hasAnyRole("USER", "CUSTOMER", "ADMIN")
-                .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/login").permitAll()
                 .antMatchers("/swagger-ui").permitAll()
                 .antMatchers("/swagger").permitAll()
                 .antMatchers("/").permitAll()
@@ -49,12 +45,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maxSessionsPreventsLogin(false);
     }
 
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/resources/templates/static/**");
-    }
 
 }

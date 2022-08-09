@@ -2,15 +2,16 @@ package ru.evaproj.analyst.history.entity;
 
 
 import lombok.Data;
-import ru.evaproj.analyst.history.models.Timeframe;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "market_name_id", "timeframe", "timestamp" } )
-})
+@Table(name = "candle", indexes = @Index(
+        name = "id_unique",
+        columnList = "timestamp, timeframe, market_name",
+        unique = true))
 public class CandleEntity {
 
     @Id
@@ -18,18 +19,21 @@ public class CandleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long timestamp;
+    private Double open;
+    private Double close;
+    private Double high;
+    private Double low;
 
-    private Long open;
-    private Long close;
-    private Long high;
-    private Long low;
     private Long volume;
 
-    @Enumerated(EnumType.STRING)
-    private Timeframe timeframe;
+    @NotNull
+    private Long timestamp;
 
-    @ManyToOne
-    private MarketEntity marketName;
+    @NotNull
+    private Long timeframe;
+
+    @NotNull
+    @Column(name = "market_name")
+    private String marketName;
 
 }
