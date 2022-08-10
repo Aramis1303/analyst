@@ -1,4 +1,4 @@
-package ru.evaproj.analyst.history.models;
+package ru.evaproj.analyst.management.models;
 
 public enum BalanceQueryStatusEnum {
     REQUEST, RESPONSE
