@@ -68,6 +68,9 @@ public class CandleMapperImpl implements CandleMapper{
                 })
                 .collect(Collectors.toList()));
 
+        candleListDto.setMarketName(marketName);
+        candleListDto.setTimeframe(timeframe);
+
         return candleListDto;
     }
 }

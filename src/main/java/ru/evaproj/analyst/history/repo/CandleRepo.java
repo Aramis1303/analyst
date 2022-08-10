@@ -13,10 +13,13 @@ public interface CandleRepo extends JpaRepository<CandleEntity, Long> {
 
     List<CandleEntity> findAllByMarketNameAndTimeframe(@Param("marketName")String marketName, @Param("timeframe")Integer timeframe);
 
-    @Query(nativeQuery = true, value = "select ce from CandleEntity ce where ce.marketName = ?1 and ce.timeframe = ?2 and ce.timestamp <= ?3 ORDER BY ce.timestamp DESC LIMIT ?4")
+    @Query(nativeQuery = true, value = "SELECT * FROM `candle` WHERE `market_name` = ?1 AND `timeframe` = ?2 AND `timestamp` <= ?3 ORDER BY `timestamp` DESC LIMIT ?4")
     List<CandleEntity> findCandleListByMarketNameAndTimeframeTillTimestamp(String marketName, Long timeframe, Long timestamp, Long depth);
 
-    @Query(nativeQuery = true, value = "SELECT DISTINCT ce.marketName FROM CandleEntity ce")
+    @Query(value = "SELECT ce FROM CandleEntity ce WHERE ce.marketName = :marketName and ce.timeframe = :timeframe and ce.timestamp <= :timestamp ORDER BY ce.timestamp DESC")
+    List<CandleEntity> findAllCandleListByMarketNameAndTimeframeTillTimestamp(String marketName, Long timeframe, Long timestamp);
+
+    @Query(value = "SELECT DISTINCT marketName FROM CandleEntity")
     List<String> findAllMarketNames();
 
 }
