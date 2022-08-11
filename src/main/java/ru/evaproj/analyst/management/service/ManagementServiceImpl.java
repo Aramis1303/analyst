@@ -84,7 +84,7 @@ public class ManagementServiceImpl implements ManagementService {
         ManagementEntity entity = managementRepo.findByTimestamp(timestamp);
 
         if (entity.getStatus().equals(OrderStatusEnum.REQUEST) || entity.getStatus().equals(OrderStatusEnum.PENDING)) {
-            entity.setStatus(OrderStatusEnum.RECALLED);
+            entity.setDealType(OrderTypeEnum.RECALL);
             managementRepo.save(entity);
         }
 

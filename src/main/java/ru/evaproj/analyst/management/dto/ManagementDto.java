@@ -16,4 +16,5 @@ public class ManagementDto {
 
     private String marketName;
 
+    private Long ticket;
 }

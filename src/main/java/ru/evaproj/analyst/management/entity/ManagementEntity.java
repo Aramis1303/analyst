@@ -30,4 +30,6 @@ public class ManagementEntity {
     @NotNull
     private String marketName;
 
+    private Long ticket;
+
 }

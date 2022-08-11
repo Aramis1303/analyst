@@ -36,7 +36,7 @@ public class ManagementController {
     @ApiOperation(value = "Продажа", notes = "Метод отправляет запрос на сделку SHORT по указанному инструменту")
     public ResponseEntity<ManagementDto> sellQuery(@ApiParam(value = "Имя торгового инструмента", example = "USD") String marketName) {
 
-        return ResponseEntity.ok(managementService.buyQuery(marketName));
+        return ResponseEntity.ok(managementService.sellQuery(marketName));
     }
 
     @GetMapping("/get_opened")
