@@ -1,8 +1,8 @@
 package ru.evaproj.analyst.management.entity;
 
 import lombok.Data;
-import ru.evaproj.analyst.management.models.DealTypeEnum;
-import ru.evaproj.analyst.management.models.ManagementDealStatusEnum;
+import ru.evaproj.analyst.management.models.OrderTypeEnum;
+import ru.evaproj.analyst.management.models.OrderStatusEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,10 +22,10 @@ public class ManagementEntity {
     private Long timestamp;
 
     @NotNull
-    private DealTypeEnum dealType;
+    private OrderTypeEnum dealType;
 
     @NotNull
-    private ManagementDealStatusEnum status;
+    private OrderStatusEnum status;
 
     @NotNull
     private String marketName;

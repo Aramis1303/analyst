@@ -1,5 +1,5 @@
 package ru.evaproj.analyst.management.models;
 
-public enum ManagementDealStatusEnum {
+public enum OrderStatusEnum {
     REQUEST, PENDING, OPENED, CLOSED, REJECTED, RECALLED
 }

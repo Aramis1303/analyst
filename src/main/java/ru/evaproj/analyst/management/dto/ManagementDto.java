@@ -1,8 +1,8 @@
 package ru.evaproj.analyst.management.dto;
 
 import lombok.Value;
-import ru.evaproj.analyst.management.models.DealTypeEnum;
-import ru.evaproj.analyst.management.models.ManagementDealStatusEnum;
+import ru.evaproj.analyst.management.models.OrderTypeEnum;
+import ru.evaproj.analyst.management.models.OrderStatusEnum;
 
 
 @Value
@@ -10,9 +10,9 @@ public class ManagementDto {
 
     private Long timestamp;
 
-    private DealTypeEnum dealType;
+    private OrderTypeEnum dealType;
 
-    private ManagementDealStatusEnum status;
+    private OrderStatusEnum status;
 
     private String marketName;
 

@@ -1,5 +1,5 @@
 package ru.evaproj.analyst.management.models;
 
-public enum DealTypeEnum {
+public enum OrderTypeEnum {
     BUY, SELL, CLOSE
 }

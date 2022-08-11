@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.evaproj.analyst.management.entity.ManagementEntity;
-import ru.evaproj.analyst.management.models.DealTypeEnum;
-import ru.evaproj.analyst.management.models.ManagementDealStatusEnum;
+import ru.evaproj.analyst.management.models.OrderTypeEnum;
+import ru.evaproj.analyst.management.models.OrderStatusEnum;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import java.util.List;
 public interface ManagementRepo extends JpaRepository<ManagementEntity, Long> {
 
     @Query("SELECT me FROM ManagementEntity me WHERE me.dealType = :dealType AND me.status = :status ORDER BY me.timestamp DESC")
-    List<ManagementEntity> findByDealTypeAndStatusOrder(DealTypeEnum dealType, ManagementDealStatusEnum status);
+    List<ManagementEntity> findByDealTypeAndStatusOrder(OrderTypeEnum dealType, OrderStatusEnum status);
 
-    ManagementEntity findTopByStatusAndMarketNameOrderByTimestamp(ManagementDealStatusEnum status, String marketName);
+    ManagementEntity findTopByStatusAndMarketNameOrderByTimestamp(OrderStatusEnum status, String marketName);
 
     ManagementEntity findByTimestamp(Long timestamp);
 
