@@ -19,7 +19,4 @@ public interface ManagementRepo extends JpaRepository<ManagementEntity, Long> {
 
     ManagementEntity findByTimestamp(Long timestamp);
 
-    @Query("SELECT me FROM ManagementEntity me WHERE me.dealType = :dealType AND me.status = :status ORDER BY me.timestamp DESC")
-    ManagementEntity cancelQuery(Long timestamp);
-
 }

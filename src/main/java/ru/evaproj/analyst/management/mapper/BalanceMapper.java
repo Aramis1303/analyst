@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.evaproj.analyst.management.dto.BalanceDto;
 import ru.evaproj.analyst.management.entity.BalanceEntity;
 
+@Deprecated
 @Component
 @Mapper(componentModel = "spring")
 public interface BalanceMapper {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.evaproj.analyst.management.dto.ManagementDto;
 import ru.evaproj.analyst.management.entity.ManagementEntity;
 
+@Deprecated
 @Component
 @Mapper(componentModel = "spring")
 public interface ManagementMapper {

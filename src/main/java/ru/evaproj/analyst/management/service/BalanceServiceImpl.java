@@ -1,10 +1,10 @@
 package ru.evaproj.analyst.management.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.evaproj.analyst.management.dto.BalanceDto;
 import ru.evaproj.analyst.management.entity.BalanceEntity;
-import ru.evaproj.analyst.management.mapper.BalanceMapper;
 import ru.evaproj.analyst.management.models.BalanceQueryStatusEnum;
 import ru.evaproj.analyst.management.repo.BalanceRepo;
 
@@ -17,12 +17,12 @@ public class BalanceServiceImpl implements BalanceService {
     BalanceRepo balanceRepo;
 
     @Autowired
-    BalanceMapper balanceMapper;
+    ModelMapper modelMapper;
 
     @Override
     public BalanceDto getBalance() {
 
-        return balanceMapper.entityToDto(balanceRepo.findTopOrderByTimestamp());
+        return modelMapper.map(balanceRepo.findTopOrderByTimestamp(), BalanceDto.class);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class BalanceServiceImpl implements BalanceService {
 
         balanceRepo.save(entity);
 
-        return balanceMapper.entityToDto(entity);
+        return modelMapper.map(entity, BalanceDto.class);
     }
 
 }
