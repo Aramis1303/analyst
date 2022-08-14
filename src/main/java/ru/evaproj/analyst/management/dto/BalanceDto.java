@@ -1,13 +1,13 @@
 package ru.evaproj.analyst.management.dto;
 
 import lombok.Value;
-import ru.evaproj.analyst.management.models.BalanceQueryStatusEnum;
+import ru.evaproj.analyst.management.models.ProcessStatus;
 
 
 @Value
 public class BalanceDto {
 
-    private BalanceQueryStatusEnum status;
+    private ProcessStatus status;
 
     private Long timestamp;
 

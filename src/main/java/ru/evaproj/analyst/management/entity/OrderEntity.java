@@ -1,16 +1,16 @@
 package ru.evaproj.analyst.management.entity;
 
 import lombok.Data;
-import ru.evaproj.analyst.management.models.OrderTypeEnum;
-import ru.evaproj.analyst.management.models.OrderStatusEnum;
+import ru.evaproj.analyst.management.models.OrderType;
+import ru.evaproj.analyst.management.models.ProcessStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-@Table(name = "management")
-public class ManagementEntity {
+@Table(name = "order")
+public class OrderEntity {
 
     @Id
     @Column(name = "id")
@@ -22,10 +22,10 @@ public class ManagementEntity {
     private Long timestamp;
 
     @NotNull
-    private OrderTypeEnum dealType;
+    private OrderType orderType;
 
     @NotNull
-    private OrderStatusEnum status;
+    private ProcessStatus status;
 
     @NotNull
     private String marketName;

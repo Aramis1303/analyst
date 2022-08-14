@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.evaproj.analyst.management.dto.BalanceDto;
 import ru.evaproj.analyst.management.entity.BalanceEntity;
-import ru.evaproj.analyst.management.models.BalanceQueryStatusEnum;
+import ru.evaproj.analyst.management.models.ProcessStatus;
 import ru.evaproj.analyst.management.repo.BalanceRepo;
 
 import java.util.Date;
@@ -22,7 +22,7 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     public BalanceDto getBalance() {
 
-        return modelMapper.map(balanceRepo.findTopOrderByTimestamp(), BalanceDto.class);
+        return modelMapper.map(balanceRepo.findLastBalanceByStatus(ProcessStatus.PERFORMED), BalanceDto.class);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class BalanceServiceImpl implements BalanceService {
 
         BalanceEntity entity = new BalanceEntity();
         entity.setTimestamp(new Date().getTime() / 1000);
-        entity.setStatus(BalanceQueryStatusEnum.REQUEST);
+        entity.setStatus(ProcessStatus.REQUESTED);
 
         balanceRepo.save(entity);
 

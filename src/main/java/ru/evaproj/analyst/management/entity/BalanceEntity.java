@@ -1,7 +1,7 @@
 package ru.evaproj.analyst.management.entity;
 
 import lombok.Data;
-import ru.evaproj.analyst.management.models.BalanceQueryStatusEnum;
+import ru.evaproj.analyst.management.models.ProcessStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ public class BalanceEntity {
     private Long id;
 
     @NotNull
-    private BalanceQueryStatusEnum status;
+    private ProcessStatus status;
 
     @NotNull
     @Column(unique=true)
