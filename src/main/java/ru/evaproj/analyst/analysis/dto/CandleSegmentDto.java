@@ -12,10 +12,10 @@ import java.util.List;
 public class CandleSegmentDto {
 
     // Целевое изменение цены
-    private Double expectedСhange;
+    private Double changeOfTarget;
 
     // Кол-во свечей до целевого изменения цены
-    private Integer lenghtToСhange;
+    private Integer lenghtToTarget;
 
     // История до изменения цены
     private List<CandleDto> candleHistory;
