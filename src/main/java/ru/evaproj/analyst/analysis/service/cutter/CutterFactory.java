@@ -8,8 +8,9 @@ public abstract class CutterFactory {
     public static Cutter getCutter(StopLossType type) {
         switch (type) {
             case STATIC: return new CutterStatic();
-            case DYNAMIC_CURRENT_PRICE: return new CutterDynamicCurrentPrice();
-            case DYNAMIC_LAST_CANDLE: return new CutterDynamicLastCandle();
+            case CURRENT_PRICE: return new CutterCurrentPrice();
+            case LAST_CANDLE: return new CutterLastCandle();
+            case LAST_EXTREMUM: return new CutterLastExtremum();
             default: new CutterTypeNotDefinedException(type.toString());
         }
 

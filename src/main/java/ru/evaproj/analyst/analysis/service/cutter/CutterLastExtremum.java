@@ -7,7 +7,7 @@ import ru.evaproj.analyst.history.entity.CandleEntity;
 import java.util.List;
 import java.util.SortedMap;
 
-public class CutterDynamicLastCandle implements Cutter {
+public class CutterLastExtremum implements Cutter {
 
     @Override
     public SortedMap<Long, CandleSegmentDto> cut(List<CandleEntity> candleList, DealType dealType, Double slRange, Double tpRange) {
