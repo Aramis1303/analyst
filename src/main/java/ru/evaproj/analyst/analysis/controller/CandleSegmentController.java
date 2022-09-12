@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.evaproj.analyst.analysis.dto.CandleSegmentDto;
-import ru.evaproj.analyst.analysis.models.StopLossType;
+import ru.evaproj.analyst.analysis.models.CutterType;
 import ru.evaproj.analyst.analysis.service.CutterServiceImpl;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class CandleSegmentController {
             @ApiParam(value = "Длина отрезка предшествующая целевому движению графика", example = "0") Integer lenght,
             @ApiParam(value = "Движение графика в % которое нас не интересует", example = "0") Double slRange,
             @ApiParam(value = "Целевое изменение цены", example = "0") Double tpRange,
-            @ApiParam(value = "Тип STOPLOSS", example = "STATIC, DYNAMIC_LAST_CANDLE, DYNAMIC_CURRENT_PRICE") StopLossType type
+            @ApiParam(value = "Тип STOPLOSS", example = "STATIC, DYNAMIC_LAST_CANDLE, DYNAMIC_CURRENT_PRICE") CutterType type
 
     ) {
 

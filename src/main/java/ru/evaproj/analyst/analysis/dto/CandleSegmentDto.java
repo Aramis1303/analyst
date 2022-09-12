@@ -1,6 +1,8 @@
 package ru.evaproj.analyst.analysis.dto;
 
+import lombok.Value;
 import ru.evaproj.analyst.history.dto.CandleDto;
+import ru.evaproj.analyst.history.dto.CandleListDto;
 
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
 *
 *
 * */
+@Value
 public class CandleSegmentDto {
 
     // Целевое изменение цены
@@ -18,6 +21,6 @@ public class CandleSegmentDto {
     private Integer lenghtToTarget;
 
     // История до изменения цены
-    private List<CandleDto> candleHistory;
+    private CandleListDto candleHistory;
 
 }

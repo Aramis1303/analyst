@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.SortedMap;
 
 public interface Cutter {
-    SortedMap<Long, CandleSegmentDto> cut (List <CandleEntity> candleList, DealType dealType, Double slRange, Double tpRange);
+    SortedMap<Long, CandleSegmentDto> cut (List <CandleEntity> candleList, Integer historyLenght, DealType dealType, Double slRange, Double tpRange);
 }
