@@ -33,4 +33,10 @@ public interface CandleRepo extends JpaRepository<CandleEntity, Long> {
     @Query(value = "SELECT DISTINCT marketName FROM CandleEntity")
     List<String> findAllMarketNames();
 
+    @Query(value = "SELECT DISTINCT timeframe FROM CandleEntity")
+    List<Long> findAllTimeframes();
+
+    @Query(nativeQuery = true, value = "SELECT DISTINCT timeframe FROM `candle` WHERE `market_name` = ?1")
+    List<Long> findTimeframesByMarketName(String marketName);
+
 }

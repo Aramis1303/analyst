@@ -7,7 +7,7 @@ import ru.evaproj.analyst.history.repo.CandleRepo;
 import java.util.List;
 
 @Service
-public class MarketServiceImpl implements MarketService {
+public class HistoryInformationServiceImpl implements HistoryInformationService {
 
     @Autowired
     private CandleRepo candleRepo;
@@ -16,6 +16,16 @@ public class MarketServiceImpl implements MarketService {
     @Override
     public List<String> getAllMarketNames() {
         return candleRepo.findAllMarketNames();
+    }
+
+    @Override
+    public List<Long> getAllTimeframes (){
+        return candleRepo.findAllTimeframes();
+    }
+
+    @Override
+    public List<Long> getTimeframesByMarketName (String marketName) {
+        return candleRepo.findTimeframesByMarketName(marketName);
     }
 
 }
