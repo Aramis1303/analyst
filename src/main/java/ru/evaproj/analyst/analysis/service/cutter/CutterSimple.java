@@ -18,7 +18,7 @@ public class CutterSimple  implements Cutter {
     CandleMapper candleMapper;
 
     @Override
-    public SortedMap<Long, CandleSegmentDto> cut(List<CandleEntity> candleList, Integer historyLenght, DealType dealType, Double slRange, Double tpRange) {
+    public synchronized SortedMap<Long, CandleSegmentDto> cut(List<CandleEntity> candleList, Integer historyLenght, DealType dealType, Double slRange, Double tpRange) {
         //TODO: Дописать игнорирование 1 свечи в качестве конца отрезка, если та входит в диапазон коммиссии * 2 за сделку
         int startPoint = 0;
 

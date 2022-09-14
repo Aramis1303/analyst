@@ -13,7 +13,7 @@ import java.util.SortedMap;
 public class CutterAverageExtremum implements Cutter {
 
     @Override
-    public SortedMap<Long, CandleSegmentDto> cut(List<CandleEntity> candleList, Integer historyLenght, DealType dealType, Double slRange, Double tpRange) {
+    public synchronized SortedMap<Long, CandleSegmentDto> cut(List<CandleEntity> candleList, Integer historyLenght, DealType dealType, Double slRange, Double tpRange) {
         // TODO: Реализовать
         if (true)
             throw new NotImplementedYetException();
