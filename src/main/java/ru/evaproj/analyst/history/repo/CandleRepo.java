@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CandleRepo extends JpaRepository<CandleEntity, Long> {
 
-    List<CandleEntity> findAllByMarketNameAndTimeframe(@Param("marketName")String marketName, @Param("timeframe")Integer timeframe);
+    List<CandleEntity> findAllByMarketNameAndTimeframe(@Param("marketName")String marketName, @Param("timeframe")Long timeframe);
 
     @Query(value = "SELECT ce FROM CandleEntity ce " +
             "WHERE ce.marketName = :marketName " +
@@ -19,7 +19,7 @@ public interface CandleRepo extends JpaRepository<CandleEntity, Long> {
             "and ce.timestamp >= :fromTimestamp " +
             "and ce.timestamp <= :toTimestamp " +
             "ORDER BY ce.timestamp ASC")
-    List<CandleEntity> findDiapasonByMarketNameAndTimeframe(String marketName, Integer timeframe, Long fromTimestamp, Long toTimestamp);
+    List<CandleEntity> findDiapasonByMarketNameAndTimeframe(String marketName, Long timeframe, Long fromTimestamp, Long toTimestamp);
 
     @Query(nativeQuery = true,
             value = "SELECT * FROM `candle` " +

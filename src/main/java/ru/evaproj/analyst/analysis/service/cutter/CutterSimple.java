@@ -1,6 +1,7 @@
 package ru.evaproj.analyst.analysis.service.cutter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.evaproj.analyst.analysis.dto.CandleSegmentDto;
 import ru.evaproj.analyst.analysis.models.DealType;
 import ru.evaproj.analyst.history.entity.CandleEntity;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-
+@Service
 public class CutterSimple  implements Cutter {
 
     @Autowired
@@ -36,7 +37,7 @@ public class CutterSimple  implements Cutter {
                     }
                     else {
                         // Если у поледовательности есть PROFIT в рамках TAKEPROFITE, то сохраняем последовательность
-                        if (candleList.get(i).getOpen() / candleList.get(startPoint).getOpen() > (1 + tpRange / 100)) {
+                        if (candleList.get(i).getOpen() / candleList.get(startPoint).getOpen() -1 > (tpRange / 100)) {
                             cutting.put(
                                     candleList.get(i).getTimestamp(),
                                     new CandleSegmentDto(
@@ -63,11 +64,11 @@ public class CutterSimple  implements Cutter {
                     }
                     else {
                         // Если у поледовательности есть PROFIT в рамках TAKEPROFITE, то сохраняем последовательность
-                        if (candleList.get(startPoint).getOpen() / candleList.get(i).getOpen() > (1 + tpRange / 100)) {
+                        if (candleList.get(i).getOpen() / candleList.get(startPoint).getOpen() -1 < (-1)*(tpRange / 100)) {
                             cutting.put(
                                     candleList.get(i).getTimestamp(),
                                     new CandleSegmentDto(
-                                            (candleList.get(startPoint).getOpen() / candleList.get(i).getOpen() -1) * 100,
+                                            (candleList.get(i).getOpen() / candleList.get(startPoint).getOpen() -1) * 100,
                                             i - startPoint,
                                             candleMapper.entityToDto(candleList.subList((startPoint - historyLenght),  startPoint))
                                     )

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CutterService {
 
-    List<CandleSegmentDto> cutHistory(String marketName, Integer timeframe, Integer lenght, Long fromTimestamp, Long toTimestamp, Double slRange, Double tpRange, CutterType type);
+    List<CandleSegmentDto> cutHistory(String marketName, Long timeframe, Integer lenght, Long fromTimestamp, Long toTimestamp, Double slRange, Double tpRange, CutterType type);
 }

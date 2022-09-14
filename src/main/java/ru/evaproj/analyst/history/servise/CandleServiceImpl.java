@@ -6,8 +6,6 @@ import ru.evaproj.analyst.history.dto.CandleListDto;
 import ru.evaproj.analyst.history.mapper.CandleMapper;
 import ru.evaproj.analyst.history.repo.CandleRepo;
 
-import java.util.stream.Collectors;
-
 
 @Service
 public class CandleServiceImpl implements CandleService {
@@ -29,6 +27,31 @@ public class CandleServiceImpl implements CandleService {
                         depth
                 )
         );
-
     }
+
+    @Override
+    public CandleListDto getCandleListForPeriod(String marketName, Long timeframe, Long fromTimestamp, Long toTimestamp) {
+
+        return candleMapper.entityToDto(
+                candleRepo.findDiapasonByMarketNameAndTimeframe(
+                        marketName,
+                        timeframe,
+                        fromTimestamp,
+                        toTimestamp
+                )
+        );
+    }
+
+    @Override
+    public CandleListDto getFullCandleList(String marketName, Long timeframe) {
+
+        return candleMapper.entityToDto(
+                candleRepo.findAllByMarketNameAndTimeframe(
+                        marketName,
+                        timeframe
+                )
+        );
+    }
+
+
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.evaproj.analyst.analysis.dto.CandleSegmentDto;
 import ru.evaproj.analyst.analysis.models.CutterType;
+import ru.evaproj.analyst.analysis.service.CutterService;
 import ru.evaproj.analyst.analysis.service.CutterServiceImpl;
 
 import java.util.List;
@@ -18,19 +19,19 @@ import java.util.List;
 public class CandleSegmentController {
 
     @Autowired
-    CutterServiceImpl cutterService;
+    CutterService cutterService;
 
-    @GetMapping
+    @GetMapping("/cutting")
     @ApiOperation(value = "Нарезка истории", notes = "Метод позволяет получить нарезанные данные отразка графика")
     public ResponseEntity<List<CandleSegmentDto>> getMarketList(
             @ApiParam(value = "Имя торгового инструмента", example = "USD") String marketName,
-            @ApiParam(value = "Период свечи", example = "5") Integer timeframe,
+            @ApiParam(value = "Период свечи", example = "5") Long timeframe,
             @ApiParam(value = "Время начала диапазона нарезки", example = "1483439400000") Long fromTimestamp,
-            @ApiParam(value = "Время окончания диапазона нарезки", example = "1486345900000") Long toTimestamp,
-            @ApiParam(value = "Длина отрезка предшествующая целевому движению графика", example = "0") Integer lenght,
-            @ApiParam(value = "Движение графика в % которое нас не интересует", example = "0") Double slRange,
-            @ApiParam(value = "Целевое изменение цены", example = "0") Double tpRange,
-            @ApiParam(value = "Тип STOPLOSS", example = "STATIC, DYNAMIC_LAST_CANDLE, DYNAMIC_CURRENT_PRICE") CutterType type
+            @ApiParam(value = "Время окончания диапазона нарезки", example = "1485348600000") Long toTimestamp,
+            @ApiParam(value = "Длина отрезка предшествующая целевому движению графика", example = "45") Integer lenght,
+            @ApiParam(value = "Stoploss", example = "0.5") Double slRange,
+            @ApiParam(value = "Takeprofite", example = "2.0") Double tpRange,
+            @ApiParam(value = "Тип Cutter", example = "STATIC") CutterType type
 
     ) {
 
@@ -39,8 +40,8 @@ public class CandleSegmentController {
                         marketName,
                         timeframe,
                         lenght,
-                        fromTimestamp,
-                        toTimestamp,
+                        (Long)fromTimestamp / 1000,
+                        (Long)toTimestamp / 1000,
                         slRange,
                         tpRange,
                         type
