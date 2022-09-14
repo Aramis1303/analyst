@@ -1,4 +1,4 @@
-package ru.evaproj.analyst.analysis.service;
+package ru.evaproj.analyst.analysis.service.cutter;
 
 import ru.evaproj.analyst.analysis.dto.CandleSegmentDto;
 import ru.evaproj.analyst.analysis.models.CutterType;

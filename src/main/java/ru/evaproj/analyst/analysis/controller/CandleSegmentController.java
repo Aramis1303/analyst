@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.evaproj.analyst.analysis.dto.CandleSegmentDto;
+import ru.evaproj.analyst.analysis.dto.ClusterNodeDto;
+import ru.evaproj.analyst.analysis.models.ClusterType;
 import ru.evaproj.analyst.analysis.models.CutterType;
-import ru.evaproj.analyst.analysis.service.CutterService;
-import ru.evaproj.analyst.analysis.service.CutterServiceImpl;
+import ru.evaproj.analyst.analysis.service.cluster.ClusterService;
+import ru.evaproj.analyst.analysis.service.cutter.CutterService;
 
 import java.util.List;
 
@@ -20,6 +22,9 @@ public class CandleSegmentController {
 
     @Autowired
     CutterService cutterService;
+
+    @Autowired
+    ClusterService clusterService;
 
     @GetMapping("/cutting")
     @ApiOperation(value = "Нарезка истории", notes = "Метод позволяет получить нарезанные данные отразка графика")
@@ -49,5 +54,22 @@ public class CandleSegmentController {
         );
     }
 
+    @GetMapping("/clustering")
+    @ApiOperation(value = "Кластеризация сегментов", notes = "Метод позволяет кластеризовать нарезанные данные")
+    public ResponseEntity<List<ClusterNodeDto>> getMarketList(
+            @ApiParam(value = "Список сегментов") List<CandleSegmentDto> segmentList,
+            @ApiParam(value = "Тип кластеризации", example = "5") ClusterType сlusterType,
+            @ApiParam(value = "Кол-во кластеров", example = "3") Integer amountOfClusters
+
+    ) {
+
+        return ResponseEntity.ok(
+                clusterService.clustering(
+                        segmentList,
+                        сlusterType,
+                        amountOfClusters
+                )
+        );
+    }
 
 }

@@ -1,18 +1,17 @@
-package ru.evaproj.analyst.analysis.service;
+package ru.evaproj.analyst.analysis.service.cutter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.evaproj.analyst.analysis.dto.CandleSegmentDto;
 import ru.evaproj.analyst.analysis.models.DealType;
 import ru.evaproj.analyst.analysis.models.CutterType;
-import ru.evaproj.analyst.analysis.service.cutter.CutterFactory;
 import ru.evaproj.analyst.history.entity.CandleEntity;
 import ru.evaproj.analyst.history.repo.CandleRepo;
 
 import java.util.*;
 
 @Service
-public class CutterServiceImpl implements CutterService{
+public class CutterServiceImpl implements CutterService {
 
     @Autowired
     CandleRepo candleRepo;
