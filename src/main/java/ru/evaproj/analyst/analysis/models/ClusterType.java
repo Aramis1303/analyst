@@ -1,5 +1,5 @@
 package ru.evaproj.analyst.analysis.models;
 
 public enum ClusterType {
-    K_MEANS, EM_ALGORITHM
+    G_MAENS, SPECTRAL, DBSCAN, AGGLOMERATIVE, MEAN_SHIFT
 }

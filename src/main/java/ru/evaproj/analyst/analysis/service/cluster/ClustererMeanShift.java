@@ -8,7 +8,7 @@ import ru.evaproj.analyst.history.exception.NotImplementedYetException;
 import java.util.List;
 
 @Service
-public class ClustererEMAlgorithm implements Clusterer{
+public class ClustererMeanShift implements Clusterer{
 
     @Override
     public List<ClusterNodeDto> clustering(List<CandleSegmentDto> segmentList, Integer amountOfClusters) {

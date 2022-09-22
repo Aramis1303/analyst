@@ -9,20 +9,31 @@ import ru.evaproj.analyst.analysis.models.ClusterType;
 public class ClusterFactory {
 
     @Autowired
-    ClustererEMAlgorithm clustererEMAlgorithm;
+    ClustererGMeans clustererGMeans;
 
     @Autowired
-    ClustererKMeans clustererKMeans;
+    ClustererSpectral clustererSpectral;
 
+    @Autowired
+    ClustererAgglomerative clustererAgglomerative;
+
+    @Autowired
+    ClustererDBScan clustererDBScan;
+
+    @Autowired
+    ClustererMeanShift clustererMeanShift;
 
     public Clusterer getAlgorithm(ClusterType type) {
         switch (type) {
-            case K_MEANS: return clustererKMeans;
-            case EM_ALGORITHM: return clustererEMAlgorithm;
+            case G_MAENS: return clustererGMeans;
+            case SPECTRAL: return clustererSpectral;
+            case DBSCAN: return clustererDBScan;
+            case AGGLOMERATIVE: return clustererAgglomerative;
+            case MEAN_SHIFT: return clustererMeanShift;
             default: new AlgorithmTypeNotDefinedException(type.toString());
         }
 
-        return clustererKMeans;
+        return clustererDBScan;
     }
 
 
